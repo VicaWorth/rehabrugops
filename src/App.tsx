@@ -19,6 +19,8 @@ type CharacterState = {
   y: number;
   rot: number;
   scale: number;
+  visible: boolean;
+  zindex: number;
   flip: boolean;
   passive_animation: "talking" | "static";
 };
@@ -37,20 +39,24 @@ const BASE_KEYFRAME = {
   y: 0,
   rot: 0,
   scale: 1,
+  visible: true,
+  zindex: 0,
   flip: false,
   passive_animation: "talking",
 } satisfies Keyframe;
 
+const characterNames = ["rugops", "kat", "bankteller"] as const;
 const [characters, setCharacters] = createStore({
   rugops: {
+    keyframes: [{ ...BASE_KEYFRAME }] as Keyframe[],
+  },
+  bankteller: {
     keyframes: [{ ...BASE_KEYFRAME }] as Keyframe[],
   },
   kat: {
     keyframes: [{ ...BASE_KEYFRAME }] as Keyframe[],
   },
 });
-
-const characterNames = ["rugops", "kat"] as const;
 
 const KeyframeEditor: Component = () => {
   const inputStyles = "p-2 rounded-md border border-neutral-300";
@@ -63,7 +69,7 @@ const KeyframeEditor: Component = () => {
 
       <label class="text-nowrap">length (s)</label>
       <input
-        onChange={(e) =>
+        onInput={(e) =>
           setCharacters(
             activeKeyframeEditor().char,
             "keyframes",
@@ -72,6 +78,10 @@ const KeyframeEditor: Component = () => {
             +e.target.value,
           )
         }
+        type="range"
+        min={0}
+        step={0.01}
+        max={10}
         class="p-2 rounded border border-neutral-300"
         value={
           characters[activeKeyframeEditor().char].keyframes[
@@ -232,6 +242,8 @@ const Character: Component<{
       y: lerp(keyframes[i].y, keyframes[i + 1].y, factor),
       rot: lerp(keyframes[i].rot, keyframes[i + 1].rot, factor),
       scale: lerp(keyframes[i].scale, keyframes[i + 1].scale, factor),
+      zindex: keyframes[i].zindex,
+      visible: keyframes[i].visible,
       flip: keyframes[i].flip,
       passive_animation: keyframes[i].passive_animation,
     };
@@ -244,6 +256,8 @@ const Character: Component<{
           if (window["DEVMODE"]) setActiveKeyframeEditor();
         }}
         style={{
+          "z-index": state().zindex,
+          visibility: state().visible ? "visible" : "hidden",
           width: "512px",
           position: "absolute",
           top: "50%",
@@ -262,22 +276,22 @@ const KeyframeNode: Component<{
 }> = (props) => {
   const [showTimeEditor, setShowTimeEditor] = createSignal(false);
 
-  const isHighlighted = () => {
+  const isHighlighted = (): number | undefined => {
     let t = time();
 
     let length = characters[props.charName].keyframes.length;
     for (let i = 0; i < length; i++) {
       t -= characters[props.charName].keyframes[i].length;
-      if (t <= 0) {
+      if (t < 0) {
         if (i == props.id) {
-          return true;
+          return -t;
         } else {
-          return false;
+          return undefined;
         }
       }
     }
 
-    return false;
+    return undefined;
   };
 
   return (
@@ -285,19 +299,42 @@ const KeyframeNode: Component<{
       <button
         onClick={() => {
           setActiveKeyframeEditor({ char: props.charName, id: props.id });
+
+          let t = 0;
+          let length = Math.min(
+            props.id,
+            characters[props.charName].keyframes.length - 1,
+          );
+          for (let i = 0; i < length; i++) {
+            t += characters[props.charName].keyframes[i].length;
+          }
+
+          setTime(t);
         }}
         class="flex items-center"
       >
-        <div
-          class={`w-4 h-4 rounded-full z-20 ${isHighlighted() ? "bg-indigo-900" : "bg-yellow-900"}`}
-        ></div>
+        <div class={`w-4 h-4 rounded-full z-30 bg-yellow-900`}></div>
 
         <div
-          class={`rounded-md h-3 ml-[-8px] z-10 ${isHighlighted() ? "bg-indigo-800" : "bg-yellow-800"}`}
+          class="relative h-3"
           style={{
             width: `${characters[props.charName].keyframes[props.id].length * 10 + 6}px`,
           }}
-        ></div>
+        >
+          <div
+            class={`rounded-md h-3 absolute top-0 ml-[-8px] z-10 bg-yellow-800`}
+            style={{
+              width: `${characters[props.charName].keyframes[props.id].length * 10 + 6}px`,
+            }}
+          ></div>
+
+          <div
+            class={`rounded-md h-3 absolute top-0 ml-[-8px] z-20 bg-indigo-800`}
+            style={{
+              width: `${(characters[props.charName].keyframes[props.id].length - isHighlighted()) * 10 + 6}px`,
+            }}
+          ></div>
+        </div>
       </button>
     </>
   );
@@ -317,7 +354,12 @@ const Timeline: Component = () => {
   };
 
   createEffect(() => {
-    if (playing()) play();
+    if (playing()) {
+      audioPlayerRef.play();
+      play();
+    } else {
+      audioPlayerRef.pause();
+    }
   });
 
   const maxKeyframeTime = () => {
@@ -333,6 +375,15 @@ const Timeline: Component = () => {
   return (
     <div class="flex gap-2">
       <button
+        onClick={() => {
+          console.log(JSON.parse(JSON.stringify(characters)));
+        }}
+        class="bg-blue-800 hover:bg-blue-700 rounded text-white px-2"
+      >
+        save
+      </button>
+
+      <button
         class="w-24 bg-orange-800 rounded text-white"
         onClick={() => setPlaying((x) => !x)}
       >
@@ -344,7 +395,10 @@ const Timeline: Component = () => {
       <input
         class="w-full"
         type="range"
-        onInput={(e) => setTime(+e.target.value)}
+        onInput={(e) => {
+          audioPlayerRef.currentTime = +e.target.value;
+          setTime(+e.target.value);
+        }}
         value={time()}
         step={0.01}
         min={0}
@@ -374,7 +428,11 @@ const AnimationEditor: Component = () => {
                       charName,
                       "keyframes",
                       characters[charName].keyframes.length,
-                      { ...BASE_KEYFRAME },
+                      {
+                        ...characters[charName].keyframes[
+                          characters[charName].keyframes.length - 1
+                        ],
+                      }, // { ...BASE_KEYFRAME },
                     );
                   }}
                 >
@@ -404,13 +462,21 @@ const AnimationEditor: Component = () => {
   );
 };
 
+let audioPlayerRef: HTMLAudioElement = undefined;
+
 const App: Component = () => {
   return (
     <div class="w-screen h-screen relative overflow-hidden">
+      <audio ref={audioPlayerRef} src="/assets/voicelines.wav" />
+
       {activeKeyframeEditor() && <KeyframeEditor />}
 
       <Character character="rugops" img="/assets/characters/char_ruggy.png" />
       <Character character="kat" img="/assets/characters/char_kat.png" />
+      <Character
+        character="bankteller"
+        img="/assets/characters/char_antarctopelta_bankteller.png"
+      />
 
       <div class="w-full h-full bg-cover bg-[url('/assets/background1.jpg')]" />
 

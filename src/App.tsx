@@ -7,6 +7,7 @@ import {
 } from "solid-js";
 import { createStore } from "solid-js/store";
 import { lerp } from "./utils";
+import { Portal } from "solid-js/web";
 
 window["DEVMODE"] = true;
 
@@ -62,7 +63,7 @@ const KeyframeEditor: Component = () => {
   const inputStyles = "p-2 rounded-md border border-neutral-300";
 
   return (
-    <div class="bg-white items-center rounded-lg border border-neutral-300 grid grid-cols-[min-content,1fr] w-72 p-2 fixed top-4 left-4 gap-2">
+    <div class="bg-white z-[10000] items-center rounded-lg border border-neutral-300 grid grid-cols-[min-content,1fr] w-72 p-2 fixed top-4 left-4 gap-2">
       <h1 class="text-lg font-bold col-span-2">
         {activeKeyframeEditor().char} Keyframe #{activeKeyframeEditor().id + 1}
       </h1>
@@ -197,6 +198,25 @@ const KeyframeEditor: Component = () => {
           characters[activeKeyframeEditor().char].keyframes[
             activeKeyframeEditor().id
           ].flip
+        }
+      />
+
+      <label>zindex</label>
+      <input
+        class={inputStyles}
+        onChange={(e) =>
+          setCharacters(
+            activeKeyframeEditor().char,
+            "keyframes",
+            activeKeyframeEditor().id,
+            "zindex",
+            +e.target.value,
+          )
+        }
+        value={
+          characters[activeKeyframeEditor().char].keyframes[
+            activeKeyframeEditor().id
+          ].zindex
         }
       />
 
@@ -340,6 +360,40 @@ const KeyframeNode: Component<{
   );
 };
 
+const [loadDataMenuShown, setLoadDataMenuShown] = createSignal(false);
+const LoadDataMenu: Component = () => {
+  const [menuText, setMenuText] = createSignal("");
+
+  return (
+    <div class="p-2 rounded-md border-neutral-300 bg-white fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] flex flex-col gap-2">
+      <label class="font-bold">Paste JSON:</label>
+
+      <textarea
+        onInput={(e) => setMenuText(e.target.value)}
+        value={menuText()}
+        class="bg-neutral-200 border-neutral-300 resize-y rounded p-2 w-72 h-24 font-mono"
+      />
+
+      <div class="grid grid-cols-2 gap-2">
+        <button
+          onClick={() => setLoadDataMenuShown(false)}
+          class="rounded bg-neutral-300 hover:bg-neutral-200 py-2"
+        >
+          Close
+        </button>
+        <button
+          onClick={() => {
+            setCharacters(JSON.parse(menuText()));
+          }}
+          class="rounded bg-blue-800 hover:bg-blue-700 py-2 text-white"
+        >
+          Load
+        </button>
+      </div>
+    </div>
+  );
+};
+
 const Timeline: Component = () => {
   let prevTime = undefined;
 
@@ -372,15 +426,33 @@ const Timeline: Component = () => {
     );
   };
 
+  const [saveText, setSaveText] = createSignal("save");
+
   return (
     <div class="flex gap-2">
       <button
         onClick={() => {
-          console.log(JSON.parse(JSON.stringify(characters)));
+          setLoadDataMenuShown(true);
         }}
         class="bg-blue-800 hover:bg-blue-700 rounded text-white px-2"
       >
-        save
+        load
+        <Portal>{loadDataMenuShown() && <LoadDataMenu />}</Portal>
+      </button>
+
+      <button
+        onClick={() => {
+          console.log(JSON.parse(JSON.stringify(characters)));
+          navigator.clipboard.writeText(JSON.stringify(characters)).then(() => {
+            setSaveText("copied!");
+            setTimeout(() => {
+              setSaveText("save");
+            }, 2000);
+          });
+        }}
+        class="bg-blue-800 hover:bg-blue-700 rounded text-white px-2"
+      >
+        {saveText()}
       </button>
 
       <button

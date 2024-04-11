@@ -61,77 +61,85 @@ const Jackpot: Component = () => {
   const OFF = 0.2;
 
   return (
-    <div
-      style={{
-        transform: `translate(-50%, -50%) scale(${scale() * scale()})`,
-      }}
-      class="flex z-50 fixed top-[50%] left-[50%] text-yellow-500"
-    >
-      <span
-        class="font-bold text-4xl"
+    <>
+      <div
+        class="z-40 w-screen h-screen bg-black fixed"
         style={{
-          translate: `0 ${Math.sin(time() + OFF) * 40}px`,
+          opacity: `${scale() / 2}`,
         }}
-      >
-        J
-      </span>
-      <span
-        class="font-bold text-4xl"
+      />
+      <div
         style={{
-          translate: `0 ${Math.sin(time() + 2 * OFF) * 40}px`,
+          transform: `translate(-50%, -50%) scale(${scale() * scale()})`,
         }}
+        class="flex z-50 fixed top-[50%] left-[50%] text-yellow-500"
       >
-        A
-      </span>
-      <span
-        class="font-bold text-4xl"
-        style={{
-          translate: `0 ${Math.sin(time() + 3 * OFF) * 40}px`,
-        }}
-      >
-        C
-      </span>
-      <span
-        class="font-bold text-4xl"
-        style={{
-          translate: `0 ${Math.sin(time() + 4 * OFF) * 40}px`,
-        }}
-      >
-        K
-      </span>
-      <span
-        class="font-bold text-4xl"
-        style={{
-          translate: `0 ${Math.sin(time() + 5 * OFF) * 40}px`,
-        }}
-      >
-        P
-      </span>
-      <span
-        class="font-bold text-4xl"
-        style={{
-          translate: `0 ${Math.sin(time() + 6 * OFF) * 40}px`,
-        }}
-      >
-        O
-      </span>
-      <span
-        class="font-bold text-4xl"
-        style={{
-          translate: `0 ${Math.sin(time() + 7 * OFF) * 40}px`,
-        }}
-      >
-        T
-      </span>
-      <span
-        class="font-bold text-4xl"
-        style={{
-          translate: `0 ${Math.sin(time() + 8 * OFF) * 40}px`,
-        }}
-      >
-        !
-      </span>
-    </div>
+        <span
+          class="font-bold text-4xl"
+          style={{
+            translate: `0 ${Math.sin(time() + OFF) * 40}px`,
+          }}
+        >
+          J
+        </span>
+        <span
+          class="font-bold text-4xl"
+          style={{
+            translate: `0 ${Math.sin(time() + 2 * OFF) * 40}px`,
+          }}
+        >
+          A
+        </span>
+        <span
+          class="font-bold text-4xl"
+          style={{
+            translate: `0 ${Math.sin(time() + 3 * OFF) * 40}px`,
+          }}
+        >
+          C
+        </span>
+        <span
+          class="font-bold text-4xl"
+          style={{
+            translate: `0 ${Math.sin(time() + 4 * OFF) * 40}px`,
+          }}
+        >
+          K
+        </span>
+        <span
+          class="font-bold text-4xl"
+          style={{
+            translate: `0 ${Math.sin(time() + 5 * OFF) * 40}px`,
+          }}
+        >
+          P
+        </span>
+        <span
+          class="font-bold text-4xl"
+          style={{
+            translate: `0 ${Math.sin(time() + 6 * OFF) * 40}px`,
+          }}
+        >
+          O
+        </span>
+        <span
+          class="font-bold text-4xl"
+          style={{
+            translate: `0 ${Math.sin(time() + 7 * OFF) * 40}px`,
+          }}
+        >
+          T
+        </span>
+        <span
+          class="font-bold text-4xl"
+          style={{
+            translate: `0 ${Math.sin(time() + 8 * OFF) * 40}px`,
+          }}
+        >
+          !
+        </span>
+      </div>
+    </>
   );
 };
 

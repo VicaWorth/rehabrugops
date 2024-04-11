@@ -9,6 +9,7 @@ import {
 import { createStore } from "solid-js/store";
 import { lerp } from "./utils";
 import { Portal } from "solid-js/web";
+import { setGameState } from "./App";
 
 window["DEVMODE"] = true;
 
@@ -32,7 +33,7 @@ const [activeKeyframeEditor, setActiveKeyframeEditor] = createSignal<
 >(undefined);
 
 const [time, setTime] = createSignal(0);
-const [playing, setPlaying] = createSignal(false);
+const [playing, setPlaying] = createSignal(true);
 
 const BASE_KEYFRAME = {
   length: 0,
@@ -302,7 +303,7 @@ const [characters, setCharacters] = createStore({
         flip: true,
         passive_animation: "talking",
       },
-    ],
+    ] as Keyframe[],
   },
   bankteller: {
     keyframes: [
@@ -372,7 +373,7 @@ const [characters, setCharacters] = createStore({
         flip: false,
         passive_animation: "talking",
       },
-    ],
+    ] as Keyframe[],
   },
   kat: {
     keyframes: [
@@ -475,7 +476,7 @@ const [characters, setCharacters] = createStore({
         flip: false,
         passive_animation: "talking",
       },
-    ],
+    ] as Keyframe[],
   },
   dinocity: {
     keyframes: [
@@ -589,7 +590,7 @@ const [characters, setCharacters] = createStore({
         flip: false,
         passive_animation: "talking",
       },
-    ],
+    ] as Keyframe[],
   },
   office: {
     keyframes: [
@@ -626,7 +627,7 @@ const [characters, setCharacters] = createStore({
         flip: false,
         passive_animation: "talking",
       },
-    ],
+    ] as Keyframe[],
   },
   bank: {
     keyframes: [
@@ -696,7 +697,7 @@ const [characters, setCharacters] = createStore({
         flip: false,
         passive_animation: "talking",
       },
-    ],
+    ] as Keyframe[],
   },
   meteor: {
     keyframes: [
@@ -744,7 +745,7 @@ const [characters, setCharacters] = createStore({
         flip: false,
         passive_animation: "talking",
       },
-    ],
+    ] as Keyframe[],
   },
   bankint: {
     keyframes: [
@@ -836,7 +837,7 @@ const [characters, setCharacters] = createStore({
         flip: false,
         passive_animation: "talking",
       },
-    ],
+    ] as Keyframe[],
   },
 });
 
@@ -1205,27 +1206,6 @@ const LoadDataMenu: Component = () => {
 };
 
 const Timeline: Component = () => {
-  let prevTime = undefined;
-
-  const play = () => {
-    if (!prevTime) prevTime = performance.now();
-    let now = performance.now();
-    setTime((t) => t + (now - prevTime) / 1000);
-    prevTime = now;
-
-    if (playing()) requestAnimationFrame(play);
-    else prevTime = undefined;
-  };
-
-  createEffect(() => {
-    if (playing()) {
-      audioPlayerRef.play();
-      play();
-    } else {
-      audioPlayerRef.pause();
-    }
-  });
-
   const maxKeyframeTime = () => {
     return Math.max(
       ...characterNames.map((charName) =>
@@ -1304,9 +1284,36 @@ export const AnimationEditor: Component<{ shown: boolean }> = (props) => {
     removeEventListener("keypress", onKeyPress);
   });
 
+  let prevTime = undefined;
+
+  const play = () => {
+    if (!prevTime) prevTime = performance.now();
+    let now = performance.now();
+    setTime((t) => t + (now - prevTime) / 1000);
+    prevTime = now;
+
+    if (playing()) requestAnimationFrame(play);
+    else prevTime = undefined;
+  };
+
+  createEffect(() => {
+    if (playing()) {
+      audioPlayerRef.play();
+      play();
+    } else {
+      audioPlayerRef.pause();
+    }
+  });
+
   return (
     <>
-      <audio ref={audioPlayerRef} src="/assets/voicelines.wav" />
+      <audio
+        onEnded={() => {
+          setGameState({ type: "SLOTS" });
+        }}
+        ref={audioPlayerRef}
+        src="/assets/voicelines.wav"
+      />
 
       {props.shown && (
         <div class="fixed bottom-4 left-4 right-4 border border-neutral-300 rounded-md h-72 bg-white flex flex-col p-2 gap-2 z-50 overflow-y-auto">

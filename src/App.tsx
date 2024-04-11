@@ -1,11 +1,13 @@
 import { Component, Match, Switch, createEffect, createSignal } from "solid-js";
 import { AnimationEditor, Character } from "./AnimationEditor";
 import { SlotMachine } from "./Slots";
+import { DinoFact } from "./DinoFact";
 
 type GameState =
   | { type: "CUTSCENE"; cutscene_id: number }
   | { type: "TITLESCREEN" }
   | { type: "SLOTS" }
+  | { type: "DINOFACT"; fact_id: number }
   | { type: "CREDITS" };
 
 export const [gameState, setGameState] = createSignal<GameState>({
@@ -14,7 +16,7 @@ export const [gameState, setGameState] = createSignal<GameState>({
 
 const TitleScreen: Component = () => {
   return (
-    <div class="flex flex-col w-full justify-center text-center mt-[25%] gap-8">
+    <div class="flex flex-col w-full justify-center text-center mt-[30vh] gap-8">
       <h1 class="text-7xl font-extrabold">Rehab Rugops</h1>
       <div class="flex flex-col gap-4 text-3xl place-items-center">
         <button
@@ -35,7 +37,7 @@ const TitleScreen: Component = () => {
 };
 
 const CutsceneViewer: Component = () => {
-  const [shown, setShown] = createSignal(true);
+  const [shown, setShown] = createSignal(false);
 
   return (
     <div class="w-screen h-screen relative overflow-hidden">
@@ -123,6 +125,11 @@ const App: Component = () => {
 
       <Match when={gameState().type === "SLOTS"}>
         <SlotMachine />
+      </Match>
+
+      <Match when={gameState().type === "DINOFACT"}>
+        {/*@ts-ignore */}
+        <DinoFact id={gameState().fact_id} />
       </Match>
 
       <Match when={gameState().type === "CREDITS"}>

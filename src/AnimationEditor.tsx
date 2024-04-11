@@ -47,31 +47,796 @@ const BASE_KEYFRAME = {
   passive_animation: "talking",
 } satisfies Keyframe;
 
-const characterNames = ["rugops", "kat", "bankteller", "dinocity", "office", "bank", "meteor", "bankint"] as const;
+const characterNames = [
+  "rugops",
+  "kat",
+  "bankteller",
+  "dinocity",
+  "office",
+  "bank",
+  "meteor",
+  "bankint",
+] as const;
 const [characters, setCharacters] = createStore({
   rugops: {
-    keyframes: [{ ...BASE_KEYFRAME }] as Keyframe[],
+    keyframes: [
+      {
+        length: 5.64,
+        x: -1,
+        y: 0.37,
+        rot: 30,
+        scale: 1.87,
+        visible: true,
+        zindex: 5,
+        flip: true,
+        passive_animation: "talking",
+      },
+      {
+        length: 0,
+        x: 0.08,
+        y: 0.47,
+        rot: 30,
+        scale: 0.5,
+        visible: true,
+        zindex: 5,
+        flip: true,
+        passive_animation: "talking",
+      },
+      {
+        length: 5.73,
+        x: -1,
+        y: 0.37,
+        rot: 30,
+        scale: 2.44,
+        visible: true,
+        zindex: 5,
+        flip: true,
+        passive_animation: "talking",
+      },
+      {
+        length: 0,
+        x: 0.33,
+        y: 0.39,
+        rot: 30,
+        scale: 2.44,
+        visible: true,
+        zindex: 5,
+        flip: true,
+        passive_animation: "talking",
+      },
+      {
+        length: 2.99,
+        x: -0.15,
+        y: 0.21,
+        rot: 30,
+        scale: 3.03,
+        visible: true,
+        zindex: 5,
+        flip: true,
+        passive_animation: "talking",
+      },
+      {
+        length: 0,
+        x: 0.39,
+        y: -0.6,
+        rot: 360,
+        scale: 2.98,
+        visible: true,
+        zindex: 5,
+        flip: true,
+        passive_animation: "talking",
+      },
+      {
+        length: 10,
+        x: -1,
+        y: 0.31,
+        rot: 28,
+        scale: 1.59,
+        visible: true,
+        zindex: 5,
+        flip: true,
+        passive_animation: "talking",
+      },
+      {
+        length: 0.78,
+        x: -1,
+        y: 0.24,
+        rot: 28,
+        scale: 1.47,
+        visible: true,
+        zindex: 5,
+        flip: true,
+        passive_animation: "talking",
+      },
+      {
+        length: 2.9,
+        x: -1,
+        y: 0.27,
+        rot: 35,
+        scale: 1.33,
+        visible: true,
+        zindex: 5,
+        flip: true,
+        passive_animation: "talking",
+      },
+      {
+        length: 0,
+        x: -0.15,
+        y: 0.32,
+        rot: 35,
+        scale: 0.67,
+        visible: true,
+        zindex: 5,
+        flip: true,
+        passive_animation: "talking",
+      },
+      {
+        length: 3.7,
+        x: -1,
+        y: 0.22,
+        rot: 35,
+        scale: 1.78,
+        visible: true,
+        zindex: 5,
+        flip: true,
+        passive_animation: "talking",
+      },
+      {
+        length: 0,
+        x: 0.21,
+        y: 0.55,
+        rot: 35,
+        scale: 1.38,
+        visible: true,
+        zindex: 5,
+        flip: true,
+        passive_animation: "talking",
+      },
+      {
+        length: 5.91,
+        x: -1,
+        y: 0.3,
+        rot: 33,
+        scale: 2.25,
+        visible: true,
+        zindex: 5,
+        flip: true,
+        passive_animation: "talking",
+      },
+      {
+        length: 0,
+        x: -0.44,
+        y: 0.32,
+        rot: 24,
+        scale: 1.63,
+        visible: true,
+        zindex: 5,
+        flip: true,
+        passive_animation: "talking",
+      },
+      {
+        length: 4.49,
+        x: -0.76,
+        y: 0.28,
+        rot: 35,
+        scale: 1.38,
+        visible: true,
+        zindex: 5,
+        flip: true,
+        passive_animation: "talking",
+      },
+      {
+        length: 10,
+        x: -0.44,
+        y: 0.44,
+        rot: 35,
+        scale: 1.73,
+        visible: true,
+        zindex: 5,
+        flip: true,
+        passive_animation: "talking",
+      },
+      {
+        length: 2.81,
+        x: -0.44,
+        y: 0.44,
+        rot: 35,
+        scale: 1.73,
+        visible: true,
+        zindex: 5,
+        flip: true,
+        passive_animation: "talking",
+      },
+      {
+        length: 0.87,
+        x: -0.44,
+        y: 0.44,
+        rot: 35,
+        scale: 1.73,
+        visible: true,
+        zindex: 5,
+        flip: true,
+        passive_animation: "talking",
+      },
+      {
+        length: 0.78,
+        x: -0.44,
+        y: 0.44,
+        rot: 61,
+        scale: 1.73,
+        visible: true,
+        zindex: 5,
+        flip: false,
+        passive_animation: "talking",
+      },
+      {
+        length: 0.33,
+        x: -0.44,
+        y: 0.44,
+        rot: 28,
+        scale: 1.73,
+        visible: true,
+        zindex: 5,
+        flip: false,
+        passive_animation: "talking",
+      },
+      {
+        length: 4.05,
+        x: -0.44,
+        y: 0.44,
+        rot: 22,
+        scale: 1.73,
+        visible: true,
+        zindex: 5,
+        flip: false,
+        passive_animation: "talking",
+      },
+      {
+        length: 0,
+        x: -0.44,
+        y: 0.44,
+        rot: 20,
+        scale: 1.73,
+        visible: true,
+        zindex: 5,
+        flip: true,
+        passive_animation: "talking",
+      },
+    ],
   },
   bankteller: {
-    keyframes: [{ ...BASE_KEYFRAME }] as Keyframe[],
+    keyframes: [
+      {
+        length: 10,
+        x: 0,
+        y: 0,
+        rot: 0,
+        scale: 1,
+        visible: false,
+        zindex: 0,
+        flip: false,
+        passive_animation: "talking",
+      },
+      {
+        length: 10,
+        x: 0,
+        y: 0,
+        rot: 0,
+        scale: 1,
+        visible: false,
+        zindex: 0,
+        flip: false,
+        passive_animation: "talking",
+      },
+      {
+        length: 10,
+        x: 0,
+        y: 0,
+        rot: 0,
+        scale: 1,
+        visible: false,
+        zindex: 0,
+        flip: false,
+        passive_animation: "talking",
+      },
+      {
+        length: 2.1,
+        x: 0,
+        y: 0,
+        rot: 0,
+        scale: 1,
+        visible: false,
+        zindex: 2,
+        flip: false,
+        passive_animation: "talking",
+      },
+      {
+        length: 5.2,
+        x: 0.32,
+        y: 0.11,
+        rot: 22,
+        scale: 1.58,
+        visible: true,
+        zindex: 2,
+        flip: false,
+        passive_animation: "talking",
+      },
+      {
+        length: 10,
+        x: 0.43,
+        y: 0.08,
+        rot: 30,
+        scale: 1.82,
+        visible: true,
+        zindex: 2,
+        flip: false,
+        passive_animation: "talking",
+      },
+    ],
   },
   kat: {
-    keyframes: [{ ...BASE_KEYFRAME }] as Keyframe[],
+    keyframes: [
+      {
+        length: 7.68,
+        x: 0,
+        y: 0,
+        rot: 0,
+        scale: 1,
+        visible: false,
+        zindex: 0,
+        flip: false,
+        passive_animation: "talking",
+      },
+      {
+        length: 10,
+        x: 0,
+        y: 0,
+        rot: 0,
+        scale: 1,
+        visible: false,
+        zindex: 0,
+        flip: false,
+        passive_animation: "talking",
+      },
+      {
+        length: 10,
+        x: 0,
+        y: 0,
+        rot: 0,
+        scale: 1,
+        visible: false,
+        zindex: 0,
+        flip: false,
+        passive_animation: "talking",
+      },
+      {
+        length: 10,
+        x: 0,
+        y: 0,
+        rot: 0,
+        scale: 1,
+        visible: false,
+        zindex: 0,
+        flip: false,
+        passive_animation: "talking",
+      },
+      {
+        length: 0,
+        x: 0,
+        y: 0,
+        rot: 0,
+        scale: 1,
+        visible: true,
+        zindex: 0,
+        flip: false,
+        passive_animation: "talking",
+      },
+      {
+        length: 3.7,
+        x: 0.31,
+        y: 0.08,
+        rot: 0,
+        scale: 1,
+        visible: true,
+        zindex: 1,
+        flip: false,
+        passive_animation: "talking",
+      },
+      {
+        length: 10,
+        x: 0,
+        y: 0,
+        rot: 0,
+        scale: 1,
+        visible: true,
+        zindex: 1,
+        flip: false,
+        passive_animation: "talking",
+      },
+      {
+        length: 10,
+        x: 0,
+        y: 0,
+        rot: 0,
+        scale: 1,
+        visible: true,
+        zindex: 1,
+        flip: false,
+        passive_animation: "talking",
+      },
+      {
+        length: 10,
+        x: 0,
+        y: 0,
+        rot: 50,
+        scale: 1,
+        visible: true,
+        zindex: 1,
+        flip: false,
+        passive_animation: "talking",
+      },
+    ],
   },
   dinocity: {
-    keyframes: [{ ...BASE_KEYFRAME}] as Keyframe[],
+    keyframes: [
+      {
+        length: 5.64,
+        x: 0,
+        y: 0,
+        rot: 0,
+        scale: 4,
+        visible: true,
+        zindex: 1,
+        flip: false,
+        passive_animation: "talking",
+      },
+      {
+        length: 2.81,
+        x: 0,
+        y: 0,
+        rot: 0,
+        scale: 4,
+        visible: false,
+        zindex: 1,
+        flip: false,
+        passive_animation: "talking",
+      },
+      {
+        length: 10,
+        x: 0,
+        y: 0,
+        rot: 0,
+        scale: 4,
+        visible: false,
+        zindex: 1,
+        flip: false,
+        passive_animation: "talking",
+      },
+      {
+        length: 10,
+        x: 0,
+        y: 0,
+        rot: 0,
+        scale: 4,
+        visible: false,
+        zindex: 1,
+        flip: false,
+        passive_animation: "talking",
+      },
+      {
+        length: 10,
+        x: 0,
+        y: 0,
+        rot: 0,
+        scale: 4,
+        visible: false,
+        zindex: 1,
+        flip: false,
+        passive_animation: "talking",
+      },
+      {
+        length: 10,
+        x: 0,
+        y: 0,
+        rot: 0,
+        scale: 4,
+        visible: false,
+        zindex: 1,
+        flip: false,
+        passive_animation: "talking",
+      },
+      {
+        length: 10,
+        x: 0,
+        y: 0,
+        rot: 0,
+        scale: 4,
+        visible: false,
+        zindex: 1,
+        flip: false,
+        passive_animation: "talking",
+      },
+      {
+        length: 10,
+        x: 0,
+        y: 0,
+        rot: 0,
+        scale: 4,
+        visible: false,
+        zindex: 1,
+        flip: false,
+        passive_animation: "talking",
+      },
+      {
+        length: 0,
+        x: 0,
+        y: 0,
+        rot: 0,
+        scale: 4,
+        visible: false,
+        zindex: 1,
+        flip: false,
+        passive_animation: "talking",
+      },
+      {
+        length: 0,
+        x: 0,
+        y: 0,
+        rot: 0,
+        scale: 4,
+        visible: false,
+        zindex: 1,
+        flip: false,
+        passive_animation: "talking",
+      },
+    ],
   },
   office: {
-    keyframes: [{ ...BASE_KEYFRAME}] as Keyframe[],
+    keyframes: [
+      {
+        length: 5.64,
+        x: 0,
+        y: 0,
+        rot: 0,
+        scale: 1,
+        visible: false,
+        zindex: 1,
+        flip: false,
+        passive_animation: "talking",
+      },
+      {
+        length: 5.64,
+        x: 0,
+        y: 0,
+        rot: 0,
+        scale: 4,
+        visible: true,
+        zindex: 2,
+        flip: false,
+        passive_animation: "talking",
+      },
+      {
+        length: 5.64,
+        x: 0,
+        y: 0,
+        rot: 0,
+        scale: 4,
+        visible: true,
+        zindex: 2,
+        flip: false,
+        passive_animation: "talking",
+      },
+    ],
   },
   bank: {
-    keyframes: [{ ...BASE_KEYFRAME}] as Keyframe[],
+    keyframes: [
+      {
+        length: 10,
+        x: 0,
+        y: 0,
+        rot: 0,
+        scale: 1,
+        visible: false,
+        zindex: 0,
+        flip: false,
+        passive_animation: "talking",
+      },
+      {
+        length: 7.95,
+        x: 0,
+        y: 0,
+        rot: 0,
+        scale: 1,
+        visible: false,
+        zindex: 0,
+        flip: false,
+        passive_animation: "talking",
+      },
+      {
+        length: 10,
+        x: 0,
+        y: 0,
+        rot: 0,
+        scale: 1,
+        visible: false,
+        zindex: 1,
+        flip: false,
+        passive_animation: "talking",
+      },
+      {
+        length: 4.14,
+        x: 0,
+        y: 0,
+        rot: 0,
+        scale: 5.84,
+        visible: true,
+        zindex: 1,
+        flip: false,
+        passive_animation: "talking",
+      },
+      {
+        length: 0,
+        x: 0,
+        y: 0,
+        rot: 0,
+        scale: 6.04,
+        visible: true,
+        zindex: 1,
+        flip: false,
+        passive_animation: "talking",
+      },
+      {
+        length: 0,
+        x: 0,
+        y: 0,
+        rot: 0,
+        scale: 6.04,
+        visible: false,
+        zindex: 1,
+        flip: false,
+        passive_animation: "talking",
+      },
+    ],
   },
   meteor: {
-    keyframes: [{ ...BASE_KEYFRAME}] as Keyframe[],
+    keyframes: [
+      {
+        length: 1.4,
+        x: 0,
+        y: 0,
+        rot: 0,
+        scale: 1,
+        visible: false,
+        zindex: 0,
+        flip: false,
+        passive_animation: "talking",
+      },
+      {
+        length: 10,
+        x: 0,
+        y: 0,
+        rot: 0,
+        scale: 1,
+        visible: false,
+        zindex: 0,
+        flip: false,
+        passive_animation: "talking",
+      },
+      {
+        length: 3.17,
+        x: 0,
+        y: 0,
+        rot: 0,
+        scale: 4,
+        visible: true,
+        zindex: 3,
+        flip: false,
+        passive_animation: "talking",
+      },
+      {
+        length: 3.61,
+        x: 0,
+        y: 0,
+        rot: 0,
+        scale: 4,
+        visible: false,
+        zindex: 0,
+        flip: false,
+        passive_animation: "talking",
+      },
+    ],
   },
   bankint: {
-    keyframes: [{ ...BASE_KEYFRAME}] as Keyframe[],
+    keyframes: [
+      {
+        length: 10,
+        x: 0,
+        y: 0,
+        rot: 0,
+        scale: 1,
+        visible: false,
+        zindex: 0,
+        flip: false,
+        passive_animation: "talking",
+      },
+      {
+        length: 10,
+        x: 0,
+        y: 0,
+        rot: 0,
+        scale: 1,
+        visible: false,
+        zindex: 0,
+        flip: false,
+        passive_animation: "talking",
+      },
+      {
+        length: 10,
+        x: 0,
+        y: 0,
+        rot: 0,
+        scale: 1,
+        visible: false,
+        zindex: 0,
+        flip: false,
+        passive_animation: "talking",
+      },
+      {
+        length: 1.84,
+        x: 0,
+        y: 0,
+        rot: 0,
+        scale: 1,
+        visible: false,
+        zindex: 1,
+        flip: false,
+        passive_animation: "talking",
+      },
+      {
+        length: 3.25,
+        x: 0,
+        y: 0,
+        rot: 0,
+        scale: 3.93,
+        visible: true,
+        zindex: 1,
+        flip: false,
+        passive_animation: "talking",
+      },
+      {
+        length: 2.37,
+        x: 0,
+        y: 0,
+        rot: 0,
+        scale: 3.83,
+        visible: true,
+        zindex: 1,
+        flip: false,
+        passive_animation: "talking",
+      },
+      {
+        length: 10,
+        x: 0,
+        y: 0,
+        rot: 0,
+        scale: 3.83,
+        visible: false,
+        zindex: 1,
+        flip: false,
+        passive_animation: "talking",
+      },
+      {
+        length: 0,
+        x: 0,
+        y: 0,
+        rot: 0,
+        scale: 3.83,
+        visible: false,
+        zindex: 1,
+        flip: false,
+        passive_animation: "talking",
+      },
+    ],
   },
 });
 
@@ -91,27 +856,27 @@ const KeyframeEditor: Component = () => {
             activeKeyframeEditor().id
           ].length.toFixed(2)}
         </span>
-      <input
-        onInput={(e) =>
-          setCharacters(
-            activeKeyframeEditor().char,
-            "keyframes",
-            activeKeyframeEditor().id,
-            "length",
-            +e.target.value,
-          )
-        }
-        type="range"
-        min={0}
-        step={0.01}
-        max={10}
-        class="p-2 rounded border border-neutral-300"
-        value={
-          characters[activeKeyframeEditor().char].keyframes[
-            activeKeyframeEditor().id
-          ].length
-        }
-      />
+        <input
+          onInput={(e) =>
+            setCharacters(
+              activeKeyframeEditor().char,
+              "keyframes",
+              activeKeyframeEditor().id,
+              "length",
+              +e.target.value,
+            )
+          }
+          type="range"
+          min={0}
+          step={0.01}
+          max={10}
+          class="p-2 rounded border border-neutral-300"
+          value={
+            characters[activeKeyframeEditor().char].keyframes[
+              activeKeyframeEditor().id
+            ].length
+          }
+        />
       </div>
 
       <label>x</label>
@@ -313,20 +1078,22 @@ export const Character: Component<{
 
   return (
     <>
-      { state().visible && <img
-        onClick={() => {
-          if (window["DEVMODE"]) setActiveKeyframeEditor();
-        }}
-        style={{
-          "z-index": state().zindex,
-          width: "512px",
-          position: "absolute",
-          top: "50%",
-          left: "50%",
-          transform: `translate(-50%, -50%) translate(${(state().x * window.screen.width) / 2}px, ${(state().y * window.screen.height) / 2}px) ${state().flip ? "scaleX(-1)" : ""} rotate(${state().rot}deg) scale(${state().scale})`,
-        }}
-        src={props.img}
-      /> }
+      {state().visible && (
+        <img
+          onClick={() => {
+            if (window["DEVMODE"]) setActiveKeyframeEditor();
+          }}
+          style={{
+            "z-index": state().zindex,
+            width: "512px",
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: `translate(-50%, -50%) translate(${(state().x * window.screen.width) / 2}px, ${(state().y * window.screen.height) / 2}px) ${state().flip ? "scaleX(-1)" : ""} rotate(${state().rot}deg) scale(${state().scale})`,
+          }}
+          src={props.img}
+        />
+      )}
     </>
   );
 };
@@ -523,7 +1290,7 @@ const Timeline: Component = () => {
   );
 };
 
-export const AnimationEditor: Component = () => {
+export const AnimationEditor: Component<{ shown: boolean }> = (props) => {
   const onKeyPress = (e: KeyboardEvent) => {
     if (e.key === " ") {
       setPlaying((p) => !p);
@@ -538,63 +1305,67 @@ export const AnimationEditor: Component = () => {
   });
 
   return (
-    <div class="fixed bottom-4 left-4 right-4 border border-neutral-300 rounded-md h-72 bg-white flex flex-col p-2 gap-2 z-50 overflow-y-auto">
-      
-      {activeKeyframeEditor() && (
-        <Portal>
-          <KeyframeEditor />
-        </Portal>
-      )}
-
+    <>
       <audio ref={audioPlayerRef} src="/assets/voicelines.wav" />
-      <Timeline />
 
-      <div class="grid grid-cols-[150px_auto] h-full">
-        <div class="flex flex-col gap-2 justify-center self-start">
-          <For each={characterNames}>
-            {(charName) => (
-              <div class="h-8 bg-neutral-200 rounded-l-md flex gap-2 items-center justify-between">
-                <span class="pl-2">{charName}</span>
-                
-                <button
-                  class="text-nowrap p-1 w-8 h-8 bg-blue bg-blue-700 hover:bg-blue-600 transition-all text-white"
-                  onClick={() => {
-                    console.log("creating keyframe");
-                    setCharacters(
-                      charName,
-                      "keyframes",
-                      characters[charName].keyframes.length,
-                      {
-                        ...characters[charName].keyframes[
-                          characters[charName].keyframes.length - 1
-                        ],
-                      }, // { ...BASE_KEYFRAME },
-                    );
-                  }}
-                >
-                  +
-                </button>
+      {props.shown && (
+        <div class="fixed bottom-4 left-4 right-4 border border-neutral-300 rounded-md h-72 bg-white flex flex-col p-2 gap-2 z-50 overflow-y-auto">
+          {activeKeyframeEditor() && (
+            <Portal>
+              <KeyframeEditor />
+            </Portal>
+          )}
+
+          <Timeline />
+
+          <div class="grid grid-cols-[150px_auto] h-full">
+            <div class="flex flex-col gap-2 justify-center self-start">
+              <For each={characterNames}>
+                {(charName) => (
+                  <div class="h-8 bg-neutral-200 rounded-l-md flex gap-2 items-center justify-between">
+                    <span class="pl-2">{charName}</span>
+
+                    <button
+                      class="text-nowrap p-1 w-8 h-8 bg-blue bg-blue-700 hover:bg-blue-600 transition-all text-white"
+                      onClick={() => {
+                        console.log("creating keyframe");
+                        setCharacters(
+                          charName,
+                          "keyframes",
+                          characters[charName].keyframes.length,
+                          {
+                            ...characters[charName].keyframes[
+                              characters[charName].keyframes.length - 1
+                            ],
+                          }, // { ...BASE_KEYFRAME },
+                        );
+                      }}
+                    >
+                      +
+                    </button>
+                  </div>
+                )}
+              </For>
+            </div>
+            <div class="overflow-auto h-full">
+              <div class="gap-2 flex flex-col min-w-min">
+                <For each={characterNames}>
+                  {(charName) => (
+                    <div class="flex gap-2 h-8 px-4 rounded-r-md bg-neutral-100">
+                      <For each={characters[charName].keyframes}>
+                        {(_keyframe, i) => (
+                          <KeyframeNode charName={charName} id={i()} />
+                        )}
+                      </For>
+                    </div>
+                  )}
+                </For>
               </div>
-            )}
-          </For>
-        </div>
-        <div class="overflow-auto h-full">
-          <div class="gap-2 flex flex-col min-w-min">
-            <For each={characterNames}>
-              {(charName) => (
-                <div class="flex gap-2 h-8 px-4 rounded-r-md bg-neutral-100">
-                  <For each={characters[charName].keyframes}>
-                    {(_keyframe, i) => (
-                      <KeyframeNode charName={charName} id={i()} />
-                    )}
-                  </For>
-                </div>
-              )}
-            </For>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
+      )}
+    </>
   );
 };
 

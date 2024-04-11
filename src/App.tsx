@@ -54,15 +54,15 @@ const CutsceneViewer: Component = () => {
       <div class="w-full h-full bg-cover bg-[url('/assets/background1.jpg')]" />
 
       <button
-          class="text-nowrap p-1 w-15 h-8 bg-blue bg-blue-700 hover:bg-blue-600 transition-all text-white fixed top-4 right-4 z-50"
-          onClick={() => {
-            setShown(x => !x);
-          }}
-        >
-          visible
-        </button>
+        class="text-nowrap p-1 w-15 h-8 bg-blue bg-blue-700 hover:bg-blue-600 transition-all text-white fixed top-4 right-4 z-50"
+        onClick={() => {
+          setShown((x) => !x);
+        }}
+      >
+        visible
+      </button>
 
-      { shown() && <AnimationEditor /> }
+      <AnimationEditor shown={shown()} />
     </div>
   );
 };

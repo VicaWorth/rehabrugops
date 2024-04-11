@@ -47,7 +47,7 @@ const BASE_KEYFRAME = {
   passive_animation: "talking",
 } satisfies Keyframe;
 
-const characterNames = ["rugops", "kat", "bankteller"] as const;
+const characterNames = ["rugops", "kat", "bankteller", "dinocity", "office", "bank", "meteor", "bankint"] as const;
 const [characters, setCharacters] = createStore({
   rugops: {
     keyframes: [{ ...BASE_KEYFRAME }] as Keyframe[],
@@ -57,6 +57,21 @@ const [characters, setCharacters] = createStore({
   },
   kat: {
     keyframes: [{ ...BASE_KEYFRAME }] as Keyframe[],
+  },
+  dinocity: {
+    keyframes: [{ ...BASE_KEYFRAME}] as Keyframe[],
+  },
+  office: {
+    keyframes: [{ ...BASE_KEYFRAME}] as Keyframe[],
+  },
+  bank: {
+    keyframes: [{ ...BASE_KEYFRAME}] as Keyframe[],
+  },
+  meteor: {
+    keyframes: [{ ...BASE_KEYFRAME}] as Keyframe[],
+  },
+  bankint: {
+    keyframes: [{ ...BASE_KEYFRAME}] as Keyframe[],
   },
 });
 
@@ -70,6 +85,12 @@ const KeyframeEditor: Component = () => {
       </h1>
 
       <label class="text-nowrap">length (s)</label>
+      <div class="flex gap-2">
+        <span class="font-mono">
+          {characters[activeKeyframeEditor().char].keyframes[
+            activeKeyframeEditor().id
+          ].length.toFixed(2)}
+        </span>
       <input
         onInput={(e) =>
           setCharacters(
@@ -91,6 +112,7 @@ const KeyframeEditor: Component = () => {
           ].length
         }
       />
+      </div>
 
       <label>x</label>
       <input
@@ -157,7 +179,7 @@ const KeyframeEditor: Component = () => {
         }
         step={0.01}
         min={0.1}
-        max={4}
+        max={8}
         class={inputStyles}
       />
 
@@ -291,13 +313,12 @@ export const Character: Component<{
 
   return (
     <>
-      <img
+      { state().visible && <img
         onClick={() => {
           if (window["DEVMODE"]) setActiveKeyframeEditor();
         }}
         style={{
           "z-index": state().zindex,
-          visibility: state().visible ? "visible" : "hidden",
           width: "512px",
           position: "absolute",
           top: "50%",
@@ -305,7 +326,7 @@ export const Character: Component<{
           transform: `translate(-50%, -50%) translate(${(state().x * window.screen.width) / 2}px, ${(state().y * window.screen.height) / 2}px) ${state().flip ? "scaleX(-1)" : ""} rotate(${state().rot}deg) scale(${state().scale})`,
         }}
         src={props.img}
-      />
+      /> }
     </>
   );
 };
@@ -517,7 +538,8 @@ export const AnimationEditor: Component = () => {
   });
 
   return (
-    <div class="fixed bottom-4 left-4 right-4 border border-neutral-300 rounded-md h-72 bg-white flex flex-col p-2 gap-2">
+    <div class="fixed bottom-4 left-4 right-4 border border-neutral-300 rounded-md h-72 bg-white flex flex-col p-2 gap-2 z-50 overflow-y-auto">
+      
       {activeKeyframeEditor() && (
         <Portal>
           <KeyframeEditor />
@@ -525,7 +547,6 @@ export const AnimationEditor: Component = () => {
       )}
 
       <audio ref={audioPlayerRef} src="/assets/voicelines.wav" />
-
       <Timeline />
 
       <div class="grid grid-cols-[150px_auto] h-full">
@@ -534,7 +555,7 @@ export const AnimationEditor: Component = () => {
             {(charName) => (
               <div class="h-8 bg-neutral-200 rounded-l-md flex gap-2 items-center justify-between">
                 <span class="pl-2">{charName}</span>
-
+                
                 <button
                   class="text-nowrap p-1 w-8 h-8 bg-blue bg-blue-700 hover:bg-blue-600 transition-all text-white"
                   onClick={() => {

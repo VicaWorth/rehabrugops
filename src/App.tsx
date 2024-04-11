@@ -33,6 +33,8 @@ const TitleScreen: Component = () => {
 };
 
 const CutsceneViewer: Component = () => {
+  const [shown, setShown] = createSignal(true);
+
   return (
     <div class="w-screen h-screen relative overflow-hidden">
       <Character character="rugops" img="/assets/characters/char_ruggy.png" />
@@ -41,10 +43,24 @@ const CutsceneViewer: Component = () => {
         character="bankteller"
         img="/assets/characters/char_antarctopelta_bankteller.png"
       />
+      <Character character="dinocity" img="/assets/dinocity.jpg" />
+      <Character character="office" img="/assets/office.jpg" />
+      <Character character="bank" img="/assets/bank.jpg" />
+      <Character character="meteor" img="/assets/meteor.jpg" />
+      <Character character="bankint" img="/assets/bankint.jpg" />
 
       <div class="w-full h-full bg-cover bg-[url('/assets/background1.jpg')]" />
 
-      <AnimationEditor />
+      <button
+          class="text-nowrap p-1 w-15 h-8 bg-blue bg-blue-700 hover:bg-blue-600 transition-all text-white fixed top-4 right-4 z-50"
+          onClick={() => {
+            setShown(x => !x);
+          }}
+        >
+          visible
+        </button>
+
+      { shown() && <AnimationEditor /> }
     </div>
   );
 };

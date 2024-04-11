@@ -20,7 +20,7 @@ const TitleScreen: Component = () => {
       <h1 class="text-7xl font-extrabold">Rehab Rugops</h1>
       <div class="flex flex-col gap-4 text-3xl place-items-center">
         <button
-          onClick={() => setGameState({ type: "CUTSCENE", cutscene_id: 0 })}
+          onClick={() => setGameState({ type: "DINOFACT", fact_id: 0 })}
           class="p-6 border-4 rounded-lg w-72 border-neutral-300 hover:bg-neutral-300 transition-colors"
         >
           Play

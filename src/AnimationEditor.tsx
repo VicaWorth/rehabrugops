@@ -1309,7 +1309,7 @@ export const AnimationEditor: Component<{ shown: boolean }> = (props) => {
     <>
       <audio
         onEnded={() => {
-          setGameState({ type: "SLOTS" });
+          setGameState({ type: "DINOFACT", fact_id: 1 });
         }}
         ref={audioPlayerRef}
         src="/assets/voicelines.wav"

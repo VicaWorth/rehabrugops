@@ -17,7 +17,8 @@ export const DinoFact: Component<{ id: number }> = (props) => {
 
     if (width() >= 384) {
       setWidth(384);
-      setGameState({ type: "SLOTS" });
+      if (props.id == 0) setGameState({ type: "CUTSCENE", cutscene_id: 0 });
+      if (props.id == 1) setGameState({ type: "SLOTS" });
     } else {
       requestAnimationFrame(render);
     }

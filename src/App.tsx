@@ -1,9 +1,11 @@
 import { Component, Match, Switch, createEffect, createSignal } from "solid-js";
 import { AnimationEditor, Character } from "./AnimationEditor";
+import { SlotMachine } from "./Slots";
 
 type GameState =
   | { type: "CUTSCENE"; cutscene_id: number }
   | { type: "TITLESCREEN" }
+  | { type: "SLOTS" }
   | { type: "CREDITS" };
 
 export const [gameState, setGameState] = createSignal<GameState>({
@@ -96,6 +98,14 @@ const Credits: Component = () => {
       >
         Victoria Worthington
       </a>
+
+      <a
+        target="_blank"
+        class="text-white hover:underline"
+        href="https://arc.net/gift/7a8eb"
+      >
+        IMPORTANT: Download the ARC browser using this link!!!!!!!!
+      </a>
     </div>
   );
 };
@@ -109,6 +119,10 @@ const App: Component = () => {
 
       <Match when={gameState().type === "CUTSCENE"}>
         <CutsceneViewer />
+      </Match>
+
+      <Match when={gameState().type === "SLOTS"}>
+        <SlotMachine />
       </Match>
 
       <Match when={gameState().type === "CREDITS"}>
